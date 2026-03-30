@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ranks.one.TtLogisticsLogin"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="471.0" fitWidth="741.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);">
+         <image>
+            <Image url="@19241.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="146.0" layoutY="96.0" prefHeight="273.0" prefWidth="421.0" />
+   </children>
+</Pane>

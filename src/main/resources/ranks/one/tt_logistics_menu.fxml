@@ -30,9 +30,9 @@
       </Pane>
       <Pane layoutX="414.0" layoutY="39.0" prefHeight="174.0" prefWidth="318.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">
          <children>
-            <Pane layoutX="14.0" layoutY="33.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: grey;">
+            <Pane layoutX="14.0" layoutY="33.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">
                <children>
-                  <ImageView fitHeight="113.0" fitWidth="114.0" layoutX="9.0" layoutY="-2.0">
+                  <ImageView fitHeight="113.0" fitWidth="114.0" layoutX="9.0" layoutY="-2.0" style="-fx-background-radius: 32;">
                      <image>
                         <Image url="@driver_15192667.png" />
                      </image>
@@ -44,7 +44,7 @@
       </Pane>
       <Pane layoutX="38.0" layoutY="261.0" prefHeight="174.0" prefWidth="318.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">
          <children>
-            <Pane layoutX="14.0" layoutY="33.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: grey;">
+            <Pane layoutX="14.0" layoutY="33.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">
                <children>
                   <ImageView fitHeight="101.0" fitWidth="103.0" layoutX="13.0" layoutY="4.0">
                      <image>
@@ -53,12 +53,21 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button layoutX="206.0" layoutY="117.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="208.0" layoutY="117.0" mnemonicParsing="false" text="Button" />
          </children>
       </Pane>
       <Pane layoutX="416.0" layoutY="261.0" prefHeight="174.0" prefWidth="318.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">
          <children>
-            <Pane layoutX="15.0" layoutY="31.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: grey;" />
+            <Pane layoutX="15.0" layoutY="31.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">
+               <children>
+                  <ImageView fitHeight="101.0" fitWidth="103.0" layoutX="15.0" layoutY="4.0">
+                     <image>
+                        <Image url="@dashboard-graph-analytics-report-svgrepo-com.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button layoutX="214.0" layoutY="113.0" mnemonicParsing="false" text="Button" />
          </children>
       </Pane>
    </children>

@@ -30,7 +30,15 @@
       </Pane>
       <Pane layoutX="414.0" layoutY="39.0" prefHeight="174.0" prefWidth="318.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">
          <children>
-            <Pane layoutX="14.0" layoutY="33.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: grey;" />
+            <Pane layoutX="14.0" layoutY="33.0" prefHeight="109.0" prefWidth="131.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: grey;">
+               <children>
+                  <ImageView fitHeight="113.0" fitWidth="114.0" layoutX="9.0" layoutY="-2.0">
+                     <image>
+                        <Image url="@driver_15192667.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
             <Button layoutX="217.0" layoutY="113.0" mnemonicParsing="false" text="Button" />
          </children>
       </Pane>

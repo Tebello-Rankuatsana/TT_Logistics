@@ -21,12 +21,14 @@
             <TextField fx:id="txtUsername" layoutX="62.0" layoutY="76.0" onAction="#handleLogin" prefHeight="48.0" prefWidth="359.0" promptText="Username" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-border-color: grey; -fx-background-radius: 32; -fx-border-radius: 32;">
                <font>
                   <Font size="14.0" />
-               </font></TextField>
+               </font>
+            </TextField>
             <PasswordField fx:id="PsdPassword" layoutX="62.0" layoutY="154.0" onAction="#handleLogin" prefHeight="48.0" prefWidth="359.0" promptText="Password" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-border-color: grey; -fx-background-radius: 32; -fx-border-radius: 32;">
                <font>
                   <Font size="14.0" />
-               </font></PasswordField>
-            <Button layoutX="205.0" layoutY="236.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="77.0" style="-fx-border-color: grey; -fx-border-radius: 32; -fx-background-radius: 32;" text="Log In" textFill="#2b2a2a" />
+               </font>
+            </PasswordField>
+            <Button fx:id="btnLogin" layoutX="205.0" layoutY="236.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="77.0" style="-fx-border-color: grey; -fx-border-radius: 32; -fx-background-radius: 32;" text="Log In" textFill="#2b2a2a" />
          </children>
       </Pane>
       <Label fx:id="feedbackLabel" layoutX="227.0" layoutY="411.0" prefHeight="17.0" prefWidth="294.0" style="-fx-alignment: center;" textFill="#fa2323">

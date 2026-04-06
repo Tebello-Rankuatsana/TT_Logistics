@@ -1,52 +1,133 @@
 package ranks.one;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class tt_logistics_loginController {
-
-    @FXML
-    private PasswordField PsdPassword;
 
     @FXML
     private TextField txtUsername;
 
     @FXML
-    private Label feedbackLabel;
+    private PasswordField PsdPassword;
 
     @FXML
-    void handleLogin(ActionEvent event) {
-        String username = txtUsername.getText();
+    private Button btnLogin;
+
+    @FXML
+    private Label feedbackLabel;
+
+    // Store user info
+    private String loggedInUsername;
+    private String loggedInPrivilege;
+
+    @FXML
+    public void initialize() {
+        btnLogin.setOnAction(event -> handleLogin());
+        txtUsername.setOnAction(event -> handleLogin());
+        PsdPassword.setOnAction(event -> handleLogin());
+    }
+
+    @FXML
+    private void handleLogin() {
+        String username = txtUsername.getText().trim();
         String password = PsdPassword.getText();
 
+        if (username.isEmpty() || password.isEmpty()) {
+            feedbackLabel.setText("Please enter username and password");
+            return;
+        }
+
         if (authenticateUser(username, password)) {
+            feedbackLabel.setText("Login successful! Loading...");
+            feedbackLabel.setStyle("-fx-text-fill: green;");
             loadMainMenu();
         } else {
-            feedbackLabel.setText("incorrect credentials");
+            feedbackLabel.setText("Invalid username or password");
+            feedbackLabel.setStyle("-fx-text-fill: #fa2323;");
+            clearFields();
         }
     }
 
     private boolean authenticateUser(String username, String password) {
-        // Check if user exists in MySQL user table
-        String query = "SELECT User, Host FROM mysql.user WHERE User = ?";
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query)) {
-            statement.setString(1, username);
-            ResultSet rs = statement.executeQuery();
+        // Using 'name' column as per your users table
+        String query = "SELECT name FROM users WHERE name = ? AND password = ?";
 
-            if (rs.next()) {
-                // Validate privileges from your custom users table
-                return validatePrivileges(username, password);
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    loggedInUsername = username;
+                    loggedInPrivilege = getUserPrivilege(username);
+                    System.out.println("User logged in: " + username + " with privilege: " + loggedInPrivilege);
+                    return true;
+                }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            feedbackLabel.setText("Database error: " + e.getMessage());
             e.printStackTrace();
         }
         return false;
     }
 
+    private String getUserPrivilege(String username) {
+        String query = "SELECT privilege_type FROM user_privileges WHERE user_name = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("privilege_type");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "VIEW_ONLY";
+    }
+
+    private void clearFields() {
+        txtUsername.clear();
+        PsdPassword.clear();
+        txtUsername.requestFocus();
+    }
+
+    private void loadMainMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("tt_logistics_menu.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // Get the main menu controller and pass user info directly
+            TtLogisticsMenu mainController = loader.getController();
+            mainController.setUserInfo(loggedInUsername, loggedInPrivilege);
+
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("TT Logistics - Fleet Management System");
+            stage.setMaximized(true);
+            stage.show();
+
+        } catch (Exception e) {
+            feedbackLabel.setText("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

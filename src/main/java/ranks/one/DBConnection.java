@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    public Connection databaseLink;
+    public static Connection databaseLink;
 
-    public Connection getConnection(){
+    public static Connection getConnection(){
         String databaseName = "tt_logistics";
         String databaseUser = "ranks_2";
         String databasePassword = "anime";

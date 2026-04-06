@@ -6,9 +6,105 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ranks.one.DriverManagement"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ranks.one.DriverManagementController">
 
+    <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Button onAction="#goBack" text="← Back" prefWidth="80"/>
+            <Label text="Driver Management" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userInfoLabel"/>
+        </HBox>
+
+        <TabPane>
+            <Tab text="Person Information">
+                <GridPane hgap="10" vgap="10" style="-fx-padding: 15;">
+                    <Label text="Full Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="fullNameField" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200"/>
+
+                    <Label text="Address:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    <TextField fx:id="addressField" GridPane.rowIndex="0" GridPane.columnIndex="3" prefWidth="200"/>
+
+                    <Label text="Phone:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="phoneField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Date of Birth:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                    <DatePicker fx:id="dobPicker" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                    <HBox spacing="10" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="4">
+                        <Button fx:id="addPersonBtn" onAction="#addPerson" text="Add Person" style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                        <Button onAction="#clearPersonForm" text="Clear"/>
+                    </HBox>
+                </GridPane>
+            </Tab>
+
+            <Tab text="Full-Time Drivers">
+                <VBox spacing="10" style="-fx-padding: 15;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Select Person:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="fullTimePersonCombo" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Employee Number:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="employeeNumberField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Salary:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="salaryField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Hire Date:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <DatePicker fx:id="hireDatePicker" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            <Button fx:id="addFullTimeBtn" onAction="#addFullTimeDriver" text="Add Full-Time Driver"/>
+                            <Button onAction="#clearFullTimeForm" text="Clear"/>
+                        </HBox>
+                    </GridPane>
+
+                    <TableView fx:id="fullTimeTable" prefHeight="250">
+                        <columns>
+                            <TableColumn text="Person ID" prefWidth="80"/>
+                            <TableColumn text="Name" prefWidth="150"/>
+                            <TableColumn text="Employee #" prefWidth="120"/>
+                            <TableColumn text="Salary" prefWidth="100"/>
+                            <TableColumn text="Hire Date" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Contract Drivers">
+                <VBox spacing="10" style="-fx-padding: 15;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Select Person:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="contractPersonCombo" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Contract Number:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="contractNumberField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Hourly Rate:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="hourlyRateField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <HBox spacing="10" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            <Button fx:id="addContractBtn" onAction="#addContractDriver" text="Add Contract Driver"/>
+                            <Button onAction="#clearContractForm" text="Clear"/>
+                        </HBox>
+                    </GridPane>
+
+                    <TableView fx:id="contractTable" prefHeight="250">
+                        <columns>
+                            <TableColumn text="Person ID" prefWidth="80"/>
+                            <TableColumn text="Name" prefWidth="150"/>
+                            <TableColumn text="Contract #" prefWidth="120"/>
+                            <TableColumn text="Hourly Rate" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+
+        <Label fx:id="statusLabel"/>
+    </VBox>
 </AnchorPane>

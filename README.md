@@ -135,3 +135,8 @@ All users can log in via the application.
 git clone https://github.com/yourusername/tt-logistics-database.git
 cd tt-logistics-database
 ```
+
+```
+ $ whoami
+ > just ranks
+```

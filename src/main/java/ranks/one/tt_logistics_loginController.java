@@ -92,7 +92,7 @@ public class tt_logistics_loginController {
 
     private void loadMainMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TtLogisticsMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("tt_logistics_menu.fxml"));
             Scene scene = new Scene(loader.load());
 
             TtLogisticsMenu mainController = loader.getController();
@@ -102,6 +102,7 @@ public class tt_logistics_loginController {
             stage.setScene(scene);
             stage.setTitle("TT Logistics - Fleet Management System");
             stage.setMaximized(false);
+            stage.setResizable(true);
             stage.show();
 
         } catch (Exception e) {

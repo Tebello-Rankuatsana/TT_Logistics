@@ -7,6 +7,10 @@
 
 > A comprehensive fleet management database solution for a logistics company — featuring EER modeling, stored procedures, triggers, views, and a full-stack application.
 
+```
+ $ whoami
+ > just ranks
+```
 ---
 
 ## 📌 Project Overview

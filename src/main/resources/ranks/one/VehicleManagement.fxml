@@ -6,9 +6,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ranks.one.VehicleManagement"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="471.0" prefWidth="741.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ranks.one.VehicleManagementController">
+
+    <Label layoutX="20.0" layoutY="20.0" text="Vehicle Management" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <Button layoutX="20.0" layoutY="400.0" onAction="#goBack" text="← Back to Main Menu" prefWidth="150.0"/>
+
+    <TableView layoutX="20.0" layoutY="80.0" prefHeight="300.0" prefWidth="700.0">
+        <columns>
+            <TableColumn text="Vehicle ID" prefWidth="80"/>
+            <TableColumn text="Registration" prefWidth="150"/>
+            <TableColumn text="Type" prefWidth="150"/>
+            <TableColumn text="Capacity" prefWidth="100"/>
+            <TableColumn text="Purchase Date" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <Button layoutX="500.0" layoutY="400.0" text="Add Vehicle" prefWidth="100"/>
+    <Button layoutX="610.0" layoutY="400.0" text="Refresh" prefWidth="100"/>
 
 </AnchorPane>

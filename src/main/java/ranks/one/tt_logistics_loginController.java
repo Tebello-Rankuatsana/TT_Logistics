@@ -101,7 +101,7 @@ public class tt_logistics_loginController {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("TT Logistics - Fleet Management System");
-            stage.setMaximized(true);
+            stage.setMaximized(false);
             stage.show();
 
         } catch (Exception e) {

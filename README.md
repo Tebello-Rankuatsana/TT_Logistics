@@ -49,3 +49,8 @@ This project delivers a fully functional relational database with advanced featu
 - `Vehicle` ↔ `Maintenance` via `Vehicle_Maintenance`
 
 ### 🔹 Key Tables
+- Person, Vehicle, Depot, Client, Delivery,
+- FullTimeDriver, ContractDriver, FleetManager,
+- Driver_Assignment, Vehicle_Maintenance, Delivery_Log
+
+

@@ -28,7 +28,6 @@ public class tt_logistics_loginController {
     @FXML
     private Label feedbackLabel;
 
-    // Store user info
     private String loggedInUsername;
     private String loggedInPrivilege;
 
@@ -61,7 +60,6 @@ public class tt_logistics_loginController {
     }
 
     private boolean authenticateUser(String username, String password) {
-        // Updated query to also get privilege_type
         String query = "SELECT name, privilege_type FROM users WHERE name = ? AND password = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -74,6 +72,8 @@ public class tt_logistics_loginController {
                 if (rs.next()) {
                     loggedInUsername = rs.getString("name");
                     loggedInPrivilege = rs.getString("privilege_type");
+
+                    System.out.println("Login Successful - User: " + loggedInUsername + ", Privilege: " + loggedInPrivilege);
                     return true;
                 }
             }
@@ -84,25 +84,6 @@ public class tt_logistics_loginController {
         return false;
     }
 
-    private String getUserPrivilege(String username) {
-        String query = "SELECT privilege_type FROM user_privileges WHERE user_name = ?";
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getString("privilege_type");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return "VIEW_ONLY";
-    }
-
     private void clearFields() {
         txtUsername.clear();
         PsdPassword.clear();
@@ -111,10 +92,9 @@ public class tt_logistics_loginController {
 
     private void loadMainMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("tt_logistics_menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TtLogisticsMenu.fxml"));
             Scene scene = new Scene(loader.load());
 
-            // Get the main menu controller and pass user info directly
             TtLogisticsMenu mainController = loader.getController();
             mainController.setUserInfo(loggedInUsername, loggedInPrivilege);
 
@@ -125,8 +105,16 @@ public class tt_logistics_loginController {
             stage.show();
 
         } catch (Exception e) {
-            feedbackLabel.setText("Error: " + e.getMessage());
+            feedbackLabel.setText("Error loading main menu: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public String getLoggedInUsername() {
+        return loggedInUsername;
+    }
+
+    public String getLoggedInPrivilege() {
+        return loggedInPrivilege;
     }
 }

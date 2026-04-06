@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -28,5 +29,10 @@
             <Button layoutX="205.0" layoutY="236.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="77.0" style="-fx-border-color: grey; -fx-border-radius: 32; -fx-background-radius: 32;" text="Log In" textFill="#2b2a2a" />
          </children>
       </Pane>
+      <Label fx:id="feedbackLabel" layoutX="227.0" layoutY="411.0" prefHeight="17.0" prefWidth="294.0" style="-fx-alignment: center;" textFill="#fa2323">
+         <font>
+            <Font name="Garamond" size="15.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

@@ -67,22 +67,22 @@ public class TtLogisticsMenu {
 
     @FXML
     private void vehicleManagement() {
-        navigateTo("/fxml/VehicleManagement.fxml", "TT Logistics - Vehicle Management");
+        navigateTo("VehicleManagement.fxml", "TT Logistics - Vehicle Management");
     }
 
     @FXML
     private void driverManagement() {
-        navigateTo("/fxml/DriverManagement.fxml", "TT Logistics - Driver Management");
+        navigateTo("DriverManagement.fxml", "TT Logistics - Driver Management");
     }
 
     @FXML
     private void tripManagement() {
-        navigateTo("/fxml/TripManagement.fxml", "TT Logistics - Trip/Delivery Management");
+        navigateTo("TripManagement.fxml", "TT Logistics - Trip/Delivery Management");
     }
 
     @FXML
     private void reportManagement() {
-        navigateTo("/fxml/ReportsManagement.fxml", "TT Logistics - Reports");
+        navigateTo("ReportsManagement.fxml", "TT Logistics - Reports");
     }
 
     @FXML

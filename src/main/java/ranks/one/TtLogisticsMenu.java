@@ -91,7 +91,7 @@ public class TtLogisticsMenu {
     @FXML
     private void vehicleManagement() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VehicleManagement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VehicleManagement.fxml"));
             Scene scene = new Scene(loader.load());
 
             VehicleManagementController controller = loader.getController();
@@ -111,7 +111,7 @@ public class TtLogisticsMenu {
     @FXML
     private void driverManagement() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DriverManagement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DriverManagement.fxml"));
             Scene scene = new Scene(loader.load());
 
             DriverManagementController controller = loader.getController();
@@ -131,7 +131,7 @@ public class TtLogisticsMenu {
     @FXML
     private void tripManagement() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TripManagement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TripManagement.fxml"));
             Scene scene = new Scene(loader.load());
 
             TripManagementController controller = loader.getController();
@@ -151,7 +151,7 @@ public class TtLogisticsMenu {
     @FXML
     private void reportManagement() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReportsManagement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportsManagement.fxml"));
             Scene scene = new Scene(loader.load());
 
             ReportsManagementController controller = loader.getController();
@@ -171,7 +171,7 @@ public class TtLogisticsMenu {
     @FXML
     private void handleLogout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("tt_logistics_login.fxml"));
             Scene scene = new Scene(loader.load());
 
             Stage stage = (Stage) btnVehicle.getScene().getWindow();

@@ -256,7 +256,7 @@ public class ReportsManagementController {
 
     @FXML
     private void goBack() {
-        navigateTo("/fxml/TtLogisticsMenu.fxml", "TT Logistics - Main Menu");
+        navigateTo("tt_logistics_menu.fxml", "TT Logistics - Main Menu");
     }
 
     private void navigateTo(String fxmlPath, String title) {

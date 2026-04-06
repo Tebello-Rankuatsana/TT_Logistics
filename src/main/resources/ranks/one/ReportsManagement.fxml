@@ -6,9 +6,94 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ranks.one.ReportsManagement"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ranks.one.ReportsManagementController">
 
+    <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Button onAction="#goBack" text="← Back" prefWidth="80"/>
+            <Label text="Reports and Analytics" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userInfoLabel" style="-fx-text-fill: #666;"/>
+        </HBox>
+
+        <TabPane>
+            <!-- Tab 1: Active Deliveries -->
+            <Tab text="Active Deliveries">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label text="Active Deliveries (Not Completed)" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="activeDeliveriesTable" prefHeight="500">
+                        <columns>
+                            <TableColumn text="Delivery ID" prefWidth="80" fx:id="colActiveId"/>
+                            <TableColumn text="Date" prefWidth="100" fx:id="colActiveDate"/>
+                            <TableColumn text="Client" prefWidth="150" fx:id="colActiveClient"/>
+                            <TableColumn text="Vehicle" prefWidth="120" fx:id="colActiveVehicle"/>
+                            <TableColumn text="Status" prefWidth="100" fx:id="colActiveStatus"/>
+                        </columns>
+                    </TableView>
+                    <Button onAction="#refreshActiveDeliveries" text="Refresh" prefWidth="100"/>
+                </VBox>
+            </Tab>
+
+            <!-- Tab 2: Driver Workload -->
+            <Tab text="Driver Workload">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label text="Driver Workload Summary" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="driverWorkloadTable" prefHeight="400">
+                        <columns>
+                            <TableColumn text="Person ID" prefWidth="80" fx:id="colWorkloadId"/>
+                            <TableColumn text="Driver Name" prefWidth="200" fx:id="colWorkloadName"/>
+                            <TableColumn text="# Deliveries" prefWidth="100" fx:id="colWorkloadDeliveries"/>
+                            <TableColumn text="Total Hours" prefWidth="100" fx:id="colWorkloadHours"/>
+                        </columns>
+                    </TableView>
+                    <Button onAction="#refreshDriverWorkload" text="Refresh" prefWidth="100"/>
+                </VBox>
+            </Tab>
+
+            <!-- Tab 3: Driver Statistics -->
+            <Tab text="Driver Statistics">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Select Driver:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="driverStatsCombo" prefWidth="250" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <Button onAction="#getDriverTotalDeliveries" text="Get Total Deliveries" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    </GridPane>
+                    <Label fx:id="driverTotalLabel" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+                    <Separator/>
+
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Select Vehicle:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="vehicleStatsCombo" prefWidth="250" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <Button onAction="#getVehicleMaintenanceCost" text="Get Total Maintenance Cost" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    </GridPane>
+                    <Label fx:id="vehicleTotalLabel" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                </VBox>
+            </Tab>
+
+            <!-- Tab 4: Maintenance Summary -->
+            <Tab text="Maintenance Summary">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label text="All Maintenance Records" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="allMaintenanceTable" prefHeight="450">
+                        <columns>
+                            <TableColumn text="Maintenance ID" prefWidth="80" fx:id="colSummaryId"/>
+                            <TableColumn text="Vehicle" prefWidth="150" fx:id="colSummaryVehicle"/>
+                            <TableColumn text="Date" prefWidth="100" fx:id="colSummaryDate"/>
+                            <TableColumn text="Type" prefWidth="150" fx:id="colSummaryType"/>
+                            <TableColumn text="Cost" prefWidth="100" fx:id="colSummaryCost"/>
+                        </columns>
+                    </TableView>
+                    <Label fx:id="totalMaintenanceCostLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #e67e22;"/>
+                    <Button onAction="#refreshMaintenanceSummary" text="Refresh" prefWidth="100"/>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </VBox>
 </AnchorPane>

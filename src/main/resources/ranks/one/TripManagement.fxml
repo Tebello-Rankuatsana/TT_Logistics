@@ -6,9 +6,178 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ranks.one.TripManagement"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ranks.one.TripManagementController">
 
+    <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Button onAction="#goBack" text="← Back" prefWidth="80"/>
+            <Label text="Trip and Delivery Management" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userInfoLabel" style="-fx-text-fill: #666;"/>
+        </HBox>
+
+        <TabPane>
+            <!-- Tab 1: Create Delivery -->
+            <Tab text="Create Delivery">
+                <GridPane hgap="10" vgap="10" style="-fx-padding: 20;">
+                    <Label text="Client:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="clientCombo" prefWidth="250" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Vehicle:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    <ComboBox fx:id="vehicleCombo" prefWidth="250" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                    <Label text="Delivery Date:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="deliveryDatePicker" prefWidth="250" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Origin:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                    <TextField fx:id="originField" prefWidth="250" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                    <Label text="Destination:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="destinationField" prefWidth="250" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Status:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                    <ComboBox fx:id="statusCombo" prefWidth="150" GridPane.rowIndex="2" GridPane.columnIndex="3">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Pending"/>
+                                <String fx:value="In Progress"/>
+                                <String fx:value="Completed"/>
+                                <String fx:value="Cancelled"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+
+                    <Button fx:id="createDeliveryBtn" onAction="#createDelivery" text="Create Delivery" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                    <Button onAction="#clearDeliveryForm" text="Clear" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </GridPane>
+            </Tab>
+
+            <!-- Tab 2: Assign Driver to Delivery -->
+            <Tab text="Assign Driver">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Select Delivery:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="deliveryCombo" prefWidth="400" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Select Driver:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="driverCombo" prefWidth="400" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Role:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="roleCombo" prefWidth="150" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Main Driver"/>
+                                    <String fx:value="Assistant"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+
+                        <Label text="Hours Worked:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="hoursWorkedField" promptText="0.00" prefWidth="150" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Button fx:id="assignDriverBtn" onAction="#assignDriverToDelivery" text="Assign Driver" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                        <Button onAction="#clearAssignmentForm" text="Clear" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <TitledPane text="Current Assignments" expanded="true">
+                        <TableView fx:id="assignmentTable" prefHeight="250">
+                            <columns>
+                                <TableColumn text="Assignment ID" prefWidth="100" fx:id="colAssignmentId"/>
+                                <TableColumn text="Driver Name" prefWidth="200" fx:id="colDriverName"/>
+                                <TableColumn text="Delivery" prefWidth="250" fx:id="colDeliveryInfo"/>
+                                <TableColumn text="Role" prefWidth="120" fx:id="colRole"/>
+                                <TableColumn text="Hours" prefWidth="80" fx:id="colHours"/>
+                            </columns>
+                        </TableView>
+                    </TitledPane>
+                </VBox>
+            </Tab>
+
+            <!-- Tab 3: Vehicle Maintenance -->
+            <Tab text="Vehicle Maintenance">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Select Vehicle:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="maintenanceVehicleCombo" prefWidth="300" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Maintenance Date:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <DatePicker fx:id="maintenanceDatePicker" prefWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Maintenance Type:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="maintenanceTypeCombo" prefWidth="200" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Oil Change"/>
+                                    <String fx:value="Tire Replacement"/>
+                                    <String fx:value="Engine Repair"/>
+                                    <String fx:value="Brake Service"/>
+                                    <String fx:value="Inspection"/>
+                                    <String fx:value="General Service"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+
+                        <Label text="Cost:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="maintenanceCostField" promptText="0.00" prefWidth="150" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Button fx:id="recordMaintenanceBtn" onAction="#recordMaintenance" text="Record Maintenance" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-background-color: #e67e22; -fx-text-fill: white;"/>
+                    </GridPane>
+
+                    <TitledPane text="Maintenance History" expanded="true">
+                        <TableView fx:id="maintenanceTable" prefHeight="250">
+                            <columns>
+                                <TableColumn text="Maintenance ID" prefWidth="100" fx:id="colMaintenanceId"/>
+                                <TableColumn text="Vehicle" prefWidth="150" fx:id="colMaintenanceVehicle"/>
+                                <TableColumn text="Date" prefWidth="120" fx:id="colMaintenanceDate"/>
+                                <TableColumn text="Type" prefWidth="150" fx:id="colMaintenanceType"/>
+                                <TableColumn text="Cost" prefWidth="100" fx:id="colMaintenanceCost"/>
+                            </columns>
+                        </TableView>
+                    </TitledPane>
+                </VBox>
+            </Tab>
+
+            <!-- Tab 4: View Deliveries -->
+            <Tab text="View Deliveries">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <HBox spacing="10">
+                        <Label text="Filter by Status:"/>
+                        <ComboBox fx:id="filterStatusCombo" onAction="#filterDeliveries" prefWidth="150">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="All"/>
+                                    <String fx:value="Pending"/>
+                                    <String fx:value="In Progress"/>
+                                    <String fx:value="Completed"/>
+                                    <String fx:value="Cancelled"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <Button onAction="#refreshDeliveries" text="Refresh"/>
+                    </HBox>
+
+                    <TableView fx:id="deliveryTable" prefHeight="400">
+                        <columns>
+                            <TableColumn text="Delivery ID" prefWidth="80" fx:id="colDeliveryId"/>
+                            <TableColumn text="Date" prefWidth="100" fx:id="colDeliveryDate"/>
+                            <TableColumn text="Client" prefWidth="150" fx:id="colClient"/>
+                            <TableColumn text="Vehicle" prefWidth="120" fx:id="colVehicleReg"/>
+                            <TableColumn text="Origin" prefWidth="150" fx:id="colOrigin"/>
+                            <TableColumn text="Destination" prefWidth="150" fx:id="colDestination"/>
+                            <TableColumn text="Status" prefWidth="100" fx:id="colDeliveryStatus"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+
+        <Label fx:id="statusLabel" style="-fx-text-fill: #27ae60;"/>
+    </VBox>
 </AnchorPane>

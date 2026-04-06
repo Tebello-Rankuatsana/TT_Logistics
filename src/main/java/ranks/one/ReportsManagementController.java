@@ -177,7 +177,7 @@ public class ReportsManagementController {
                 totalCost += rs.getDouble("cost");
             }
             allMaintenanceTable.setItems(list);
-            totalMaintenanceCostLabel.setText("Total Maintenance Cost Across All Vehicles: $" + String.format("%.2f", totalCost));
+            totalMaintenanceCostLabel.setText("Total Maintenance Cost Across All Vehicles: M" + String.format("%.2f", totalCost));
         } catch (SQLException e) {
             e.printStackTrace();
         }

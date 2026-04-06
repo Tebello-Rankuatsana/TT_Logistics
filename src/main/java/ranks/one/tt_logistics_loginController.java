@@ -61,8 +61,8 @@ public class tt_logistics_loginController {
     }
 
     private boolean authenticateUser(String username, String password) {
-        // Using 'name' column as per your users table
-        String query = "SELECT name FROM users WHERE name = ? AND password = ?";
+        // Updated query to also get privilege_type
+        String query = "SELECT name, privilege_type FROM users WHERE name = ? AND password = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -72,9 +72,8 @@ public class tt_logistics_loginController {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    loggedInUsername = username;
-                    loggedInPrivilege = getUserPrivilege(username);
-                    System.out.println("User logged in: " + username + " with privilege: " + loggedInPrivilege);
+                    loggedInUsername = rs.getString("name");
+                    loggedInPrivilege = rs.getString("privilege_type");
                     return true;
                 }
             }

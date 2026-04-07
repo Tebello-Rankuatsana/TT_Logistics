@@ -6,38 +6,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
+
 <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ranks.one.VehicleManagementController">
 
-    <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
+    <VBox spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 
-        <!-- Header -->
-        <HBox alignment="CENTER_LEFT" spacing="20">
-            <Button onAction="#goBack" text="← Back" prefWidth="80"/>
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <Button onAction="#goBack" text="← Back" prefWidth="80.0"/>
             <Label text="Vehicle Management" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="userInfoLabel" style="-fx-text-fill: #666;"/>
         </HBox>
 
-        <!-- Form Section -->
         <TitledPane text="Vehicle Information" expanded="true" collapsible="false">
-            <GridPane hgap="10" vgap="10" style="-fx-padding: 15;">
+            <GridPane hgap="10.0" vgap="10.0" style="-fx-padding: 15;">
                 <Label text="Registration Number:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="regNumberField" promptText="ABC-123" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200"/>
+                <TextField fx:id="regNumberField" promptText="ABC-123" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200.0"/>
 
                 <Label text="Vehicle Type:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-                <ComboBox fx:id="vehicleTypeCombo" prefWidth="150" GridPane.rowIndex="0" GridPane.columnIndex="3">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Truck"/>
-                            <String fx:value="Van"/>
-                            <String fx:value="Lorry"/>
-                            <String fx:value="Trailer"/>
-                        </FXCollections>
-                    </items>
-                </ComboBox>
+                <ComboBox fx:id="vehicleTypeCombo" prefWidth="150.0" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
 
                 <Label text="Capacity (kg):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                 <TextField fx:id="capacityField" promptText="5000" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
@@ -46,9 +34,9 @@
                 <DatePicker fx:id="purchaseDatePicker" promptText="YYYY-MM-DD" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
 
                 <Label text="Depot:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="depotCombo" prefWidth="200" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <ComboBox fx:id="depotCombo" prefWidth="200.0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-                <HBox spacing="10" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="4">
+                <HBox spacing="10.0" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="4">
                     <Button fx:id="addBtn" onAction="#addVehicle" text="Add Vehicle" style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
                     <Button fx:id="updateBtn" onAction="#updateVehicle" text="Update Vehicle" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
                     <Button fx:id="deleteBtn" onAction="#deleteVehicle" text="Delete Vehicle" style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
@@ -57,22 +45,19 @@
             </GridPane>
         </TitledPane>
 
-        <!-- Table Section -->
         <TitledPane text="Vehicle List" expanded="true" collapsible="false">
-            <TableView fx:id="vehicleTable" prefHeight="350">
+            <TableView fx:id="vehicleTable" prefHeight="350.0">
                 <columns>
-                    <TableColumn text="ID" prefWidth="50" fx:id="colId"/>
-                    <TableColumn text="Registration" prefWidth="150" fx:id="colRegistration"/>
-                    <TableColumn text="Type" prefWidth="120" fx:id="colType"/>
-                    <TableColumn text="Capacity (kg)" prefWidth="100" fx:id="colCapacity"/>
-                    <TableColumn text="Purchase Date" prefWidth="120" fx:id="colPurchaseDate"/>
-                    <TableColumn text="Depot" prefWidth="150" fx:id="colDepot"/>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50.0"/>
+                    <TableColumn fx:id="colRegistration" text="Registration" prefWidth="150.0"/>
+                    <TableColumn fx:id="colType" text="Type" prefWidth="120.0"/>
+                    <TableColumn fx:id="colCapacity" text="Capacity (kg)" prefWidth="100.0"/>
+                    <TableColumn fx:id="colPurchaseDate" text="Purchase Date" prefWidth="120.0"/>
+                    <TableColumn fx:id="colDepot" text="Depot" prefWidth="150.0"/>
                 </columns>
             </TableView>
         </TitledPane>
 
-        <!-- Status Label -->
         <Label fx:id="statusLabel" style="-fx-text-fill: #27ae60;"/>
     </VBox>
-
 </AnchorPane>

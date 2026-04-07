@@ -19,9 +19,11 @@ public class VehicleManagementController {
     @FXML private DatePicker purchaseDatePicker;
     @FXML private TableView<Vehicle> vehicleTable;
     @FXML private TableColumn<Vehicle, Integer> colId;
-    @FXML private TableColumn<Vehicle, String> colRegistration, colType, colDepot;
+    @FXML private TableColumn<Vehicle, String> colRegistration;
+    @FXML private TableColumn<Vehicle, String> colType;
     @FXML private TableColumn<Vehicle, Integer> colCapacity;
     @FXML private TableColumn<Vehicle, Date> colPurchaseDate;
+    @FXML private TableColumn<Vehicle, String> colDepot;
     @FXML private Button addBtn, updateBtn, deleteBtn;
     @FXML private Label statusLabel, userInfoLabel;
 
@@ -36,17 +38,16 @@ public class VehicleManagementController {
         loadDepots();
         loadVehicles();
         setupTableSelection();
-        loadUserInfo();
+
+        // Add vehicle types
+        vehicleTypeCombo.getItems().addAll("Truck", "Van", "Lorry", "Trailer", "Bus", "Pickup");
     }
 
     public void setUserInfo(String username, String privilege) {
         this.username = username;
         this.userPrivilege = privilege;
+        userInfoLabel.setText("User: " + username + " | Role: " + privilege);
         applyPrivilegeRestrictions();
-    }
-
-    private void loadUserInfo() {
-        userInfoLabel.setText("User: " + username + " | Role: " + userPrivilege);
     }
 
     private void applyPrivilegeRestrictions() {
@@ -59,9 +60,6 @@ public class VehicleManagementController {
             case "INSERT_ONLY":
                 updateBtn.setDisable(true);
                 deleteBtn.setDisable(true);
-                break;
-            case "ALL_PRIVILEGES":
-                // All enabled
                 break;
         }
     }
@@ -254,12 +252,19 @@ public class VehicleManagementController {
         vehicleTypeCombo.setValue(vehicle.getVehicleType());
         capacityField.setText(String.valueOf(vehicle.getCapacity()));
         purchaseDatePicker.setValue(vehicle.getPurchaseDate().toLocalDate());
-        depotCombo.setValue(vehicle.getDepotName());
+
+        // Find and set depot in combo box
+        for (String item : depotCombo.getItems()) {
+            if (item.contains(vehicle.getDepotName())) {
+                depotCombo.setValue(item);
+                break;
+            }
+        }
     }
 
     @FXML
     private void goBack() {
-        navigateTo("/fxml/TtLogisticsMenu.fxml", "TT Logistics - Main Menu");
+        navigateTo("tt_logistics_menu.fxml", "TT Logistics - Main Menu");
     }
 
     private void navigateTo(String fxmlPath, String title) {

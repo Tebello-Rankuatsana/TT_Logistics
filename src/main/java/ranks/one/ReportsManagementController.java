@@ -231,7 +231,7 @@ public class ReportsManagementController {
 
             if (rs.next()) {
                 double total = rs.getDouble("total");
-                vehicleTotalLabel.setText("Total Maintenance Cost for " + vehicleStatsCombo.getValue().split(" - ")[1] + ": $" + String.format("%.2f", total));
+                vehicleTotalLabel.setText("Total Maintenance Cost for " + vehicleStatsCombo.getValue().split(" - ")[1] + ": M" + String.format("%.2f", total));
             }
         } catch (SQLException e) {
             vehicleTotalLabel.setText("Error: " + e.getMessage());

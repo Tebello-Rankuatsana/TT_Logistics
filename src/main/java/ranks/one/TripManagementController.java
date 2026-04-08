@@ -292,7 +292,7 @@ public class TripManagementController {
         String role = roleCombo.getValue();
         double hoursWorked = Double.parseDouble(hoursWorkedField.getText());
 
-        // Call stored procedure
+        // Call stored procedure for assigning driver
         String call = "{CALL assign_driver_to_delivery(?, ?, ?, ?)}";
 
         try (Connection conn = DBConnection.getConnection();
@@ -332,6 +332,7 @@ public class TripManagementController {
         int vehicleId = Integer.parseInt(maintenanceVehicleCombo.getValue().split(" - ")[0]);
         double cost = Double.parseDouble(maintenanceCostField.getText());
 
+//        calling procedure to record vehicle maintenace
         String call = "{CALL record_vehicle_maintenance(?, ?, ?, ?)}";
 
         try (Connection conn = DBConnection.getConnection();

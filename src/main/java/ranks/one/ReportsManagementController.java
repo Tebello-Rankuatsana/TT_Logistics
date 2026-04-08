@@ -192,7 +192,7 @@ public class ReportsManagementController {
 
         int personId = Integer.parseInt(driverStatsCombo.getValue().split(" - ")[0]);
 
-        // Call the function
+        // Calling the function to return total deliveries for single person
         String query = "SELECT total_deliveries_by_driver(?) as total";
 
         try (Connection conn = DBConnection.getConnection();
@@ -220,7 +220,7 @@ public class ReportsManagementController {
 
         int vehicleId = Integer.parseInt(vehicleStatsCombo.getValue().split(" - ")[0]);
 
-        // Call the function
+        // Calling the function to return total vehicle maintenance
         String query = "SELECT vehicle_total_maintenance(?) as total";
 
         try (Connection conn = DBConnection.getConnection();

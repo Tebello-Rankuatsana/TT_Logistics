@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="471.0" fitWidth="741.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: grey;">
          <image>
-            <Image url="@19241.jpg" />
+            <Image url="@images/19241.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="140.0" layoutY="82.0" prefHeight="308.0" prefWidth="462.0" style="-fx-background-color: rgba(255, 255, 255, 0.7); -fx-background-radius: 32; -fx-border-radius: 32; -fx-border-color: grey;">

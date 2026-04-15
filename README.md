@@ -1,4 +1,4 @@
-# 🚛 TT Logistics Database System
+#  TT Logistics Database System
 
 [![Database](https://img.shields.io/badge/MySQL-Database-blue?logo=mysql)](https://www.mysql.com/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-Desktop-007396?logo=java)](https://openjfx.io/)
@@ -13,53 +13,53 @@
 ```
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 **TT Logistics** requires a robust database system to manage:
-- 👥 Personnel (Full-Time Drivers, Contract Drivers, Fleet Managers)
-- 🚚 Vehicles and Depots
-- 📦 Client Deliveries
-- 🔧 Vehicle Maintenance
-- 🧑‍🔧 Driver Supervision & Assignments
+-  Personnel (Full-Time Drivers, Contract Drivers, Fleet Managers)
+-  Vehicles and Depots
+-  Client Deliveries
+-  Vehicle Maintenance
+-  Driver Supervision & Assignments
 
 This project delivers a fully functional relational database with advanced features like **specialization**, **many-to-many relationships**, **business logic automation**, and a **front-end application** (React / JavaFX).
 
 ---
 
-## 🎯 Objectives Achieved
+##  Objectives Achieved
 
 | Feature | Status |
 |---------|--------|
-| ✅ EER Diagram | Completed |
-| ✅ Mapping & Normalization | Completed |
-| ✅ Table Implementation | Completed |
-| ✅ Stored Procedures (2) | Completed |
-| ✅ User-Defined Functions (2) | Completed |
-| ✅ Triggers (2) | Completed |
-| ✅ Views (2) | Completed |
-| ✅ User Management (6 users) | Completed |
-| ✅ Application (Login + CRUD + Reports) | Completed |
+|  EER Diagram | Completed |
+|  Mapping & Normalization | Completed |
+|  Table Implementation | Completed |
+|  Stored Procedures (2) | Completed |
+|  User-Defined Functions (2) | Completed |
+|  Triggers (2) | Completed |
+|  Views (2) | Completed |
+|  User Management (6 users) | Completed |
+|  Application (Login + CRUD + Reports) | Completed |
 
 ---
 
-## 🧱 Database Schema Highlights
+##  Database Schema Highlights
 
-### 🔹 Specialization (Superclass/Subclass)
+###  Specialization (Superclass/Subclass)
 - **Person** → FullTimeDriver, ContractDriver, FleetManager
 - A person can have **multiple roles** simultaneously.
 
-### 🔹 Many-to-Many Relationships
+###  Many-to-Many Relationships
 - `Delivery` ↔ `Driver` via `Driver_Assignment` (with role & hours_worked)
 - `Vehicle` ↔ `Maintenance` via `Vehicle_Maintenance`
 
-### 🔹 Key Tables
+###  Key Tables
 - Person, Vehicle, Depot, Client, Delivery,
 - FullTimeDriver, ContractDriver, FleetManager,
 - Driver_Assignment, Vehicle_Maintenance, Delivery_Log
 
 ---
 
-## ⚙️ Stored Procedures
+##  Stored Procedures
 
 ### 1. `assign_driver_to_delivery`
 - Accepts: `person_id`, `delivery_id`, `role`, `hours_worked`
@@ -72,7 +72,7 @@ This project delivers a fully functional relational database with advanced featu
 
 ---
 
-## 📊 User-Defined Functions
+##  User-Defined Functions
 
 ### 1. `total_deliveries_by_driver(person_id)`
 Returns total deliveries handled by a specific driver.
@@ -82,7 +82,7 @@ Returns total maintenance cost for a vehicle (or 0 if none).
 
 ---
 
-## ⚡ Triggers
+##  Triggers
 
 | Trigger | Table | Event | Action |
 |---------|-------|-------|--------|
@@ -91,7 +91,7 @@ Returns total maintenance cost for a vehicle (or 0 if none).
 
 ---
 
-## 👁️ Views
+##  Views
 
 ### `Active_Deliveries_View`
 Shows only deliveries where status ≠ 'Completed' — includes client name & vehicle registration.
@@ -101,7 +101,7 @@ Summarizes each driver’s total deliveries and hours worked.
 
 ---
 
-## 👥 User Management
+##  User Management
 
 | User Type | Credentials | Privileges |
 |-----------|-------------|------------|
@@ -113,20 +113,20 @@ All users can log in via the application.
 
 ---
 
-## 🖥️ Application Features (JavaFX)
+##  Application Features (JavaFX)
 
  ```
-📱 Login Screen
+ Login Screen
 └── Authenticates against database users
 
 🏠 Main Menu
-├── 🚗 Vehicle Management
-├── 👤 Driver Management
-├── 🧭 Trip (Delivery) Management
-└── 📈 Reports Screen
+├── Vehicle Management
+├── Driver Management
+├── Trip (Delivery) Management
+└── Reports Screen
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - MySQL Server 8.0+

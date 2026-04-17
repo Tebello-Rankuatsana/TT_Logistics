@@ -139,15 +139,15 @@ public class TripManagementController {
         loadDeliveryCombo();
 
         // Load drivers
-        String driverQuery = "SELECT p.person_id, p.full_name FROM Person p " +
+        String query = "SELECT p.person_id, p.full_name FROM Person p " +
                 "JOIN Full_Time_Driver f ON p.person_id = f.person_id " +
                 "UNION " +
                 "SELECT p.person_id, p.full_name FROM Person p " +
                 "JOIN Contract_Driver c ON p.person_id = c.person_id";
         try (Connection conn = HelloApplication.DB.getDatabaseLink();
-             Statement stmt = conn.createStatement();
-             HelloApplication.DB.setStmt(driverQuery);
-             ResultSet rs = stmt.executeQuery(driverQuery)) {
+             HelloApplication.DB.openConnection();
+             HelloApplication.DB.getStmt(query);
+             ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 driverCombo.getItems().add(rs.getInt("person_id") + " - " + rs.getString("full_name"));
             }

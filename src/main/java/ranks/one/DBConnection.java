@@ -56,7 +56,7 @@ public class DBConnection {
 
     public void setStmt(String query) {
         try {
-            this.stmt = this.getDatabaseLink().createStatement(query);
+            this.stmt = this.getDatabaseLink().createStatement();
 
         }catch (SQLException e){
             throw new RuntimeException(e);

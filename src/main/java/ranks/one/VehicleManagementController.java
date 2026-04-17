@@ -95,6 +95,9 @@ public class VehicleManagementController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            HelloApplication.DB.closeDataLink();
+        }
     }
 
     private void loadVehicles() {
@@ -103,7 +106,7 @@ public class VehicleManagementController {
 
         try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
-             HelloApplication.DB.setRs();
+             HelloApplication.DB.setRs(query);
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
@@ -120,6 +123,9 @@ public class VehicleManagementController {
             vehicleTable.setItems(vehicleList);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            HelloApplication.DB.closeDataLink();
         }
     }
 

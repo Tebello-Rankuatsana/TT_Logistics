@@ -88,7 +88,7 @@ public class ReportsManagementController {
                 "UNION " +
                 "SELECT p.person_id, p.full_name FROM Person p " +
                 "JOIN Contract_Driver c ON p.person_id = c.person_id";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(driverQuery)) {
             while (rs.next()) {
@@ -98,7 +98,7 @@ public class ReportsManagementController {
 
         // Load vehicles for stats
         String vehicleQuery = "SELECT vehicle_id, registration_number FROM Vehicle";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(vehicleQuery)) {
             while (rs.next()) {
@@ -112,7 +112,7 @@ public class ReportsManagementController {
         String query = "SELECT * FROM Active_Deliveries_View";
 
         ObservableList<ActiveDelivery> list = FXCollections.observableArrayList();
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -136,7 +136,7 @@ public class ReportsManagementController {
         String query = "SELECT * FROM Driver_Workload_View";
 
         ObservableList<DriverWorkload> list = FXCollections.observableArrayList();
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -161,7 +161,8 @@ public class ReportsManagementController {
         ObservableList<VehicleMaintenance> list = FXCollections.observableArrayList();
         double totalCost = 0;
 
-        try (Connection conn = DBConnection.getConnection();
+        try (
+                Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -195,7 +196,7 @@ public class ReportsManagementController {
         // Calling the function to return total deliveries for single person
         String query = "SELECT total_deliveries_by_driver(?) as total";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, personId);
@@ -223,7 +224,7 @@ public class ReportsManagementController {
         // Calling the function to return total vehicle maintenance
         String query = "SELECT vehicle_total_maintenance(?) as total";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, vehicleId);

@@ -103,6 +103,7 @@ public class VehicleManagementController {
 
         try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
+             HelloApplication.DB.setRs();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {

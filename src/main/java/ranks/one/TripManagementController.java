@@ -114,7 +114,7 @@ public class TripManagementController {
     private void loadComboBoxes() {
         // Load clients
         String clientQuery = "SELECT client_id, client_name FROM Client";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(clientQuery)) {
             while (rs.next()) {
@@ -124,10 +124,10 @@ public class TripManagementController {
 
         // Load vehicles
         String vehicleQuery = "SELECT vehicle_id, registration_number FROM Vehicle";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              //Statement stmt = conn.createStatement();
-             HelloApplication.DB.setStmt(query);
-             ResultSet rs = stmt.executeQuery(vehicleQuery)) {
+             HelloApplication.DB.setStmt(vehicleQuery);
+             ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 String vehicleItem = rs.getInt("vehicle_id") + " - " + rs.getString("registration_number");
                 vehicleCombo.getItems().add(vehicleItem);

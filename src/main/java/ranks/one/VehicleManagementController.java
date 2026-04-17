@@ -84,7 +84,7 @@ public class VehicleManagementController {
 
     private void loadDepots() {
         String query = "SELECT depot_id, depot_name FROM Depot";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -101,7 +101,7 @@ public class VehicleManagementController {
         String query = "SELECT v.*, d.depot_name FROM Vehicle v LEFT JOIN Depot d ON v.depot_id = d.depot_id";
         vehicleList.clear();
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -128,18 +128,22 @@ public class VehicleManagementController {
 
         String query = "INSERT INTO Vehicle (registration_number, vehicle_type, capacity, purchase_date, depot_id) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try {
+            //(Connection conn = HelloApplication.DB.getDatabaseLink();
+             //PreparedStatement HelloApplication.DB.getPstmt() = conn.prepareStatement(query)) 
+            HelloApplication.DB.openConnection();
+            HelloApplication.DB.setPstmt(query);
 
-            pstmt.setString(1, regNumberField.getText());
-            pstmt.setString(2, vehicleTypeCombo.getValue());
-            pstmt.setInt(3, Integer.parseInt(capacityField.getText()));
-            pstmt.setDate(4, Date.valueOf(purchaseDatePicker.getValue()));
+            HelloApplication.DB.getPstmt().setString(1, regNumberField.getText());
+            HelloApplication.DB.getPstmt().setString(2, vehicleTypeCombo.getValue());
+            HelloApplication.DB.getPstmt().setInt(3, Integer.parseInt(capacityField.getText()));
+            HelloApplication.DB.getPstmt().setDate(4, Date.valueOf(purchaseDatePicker.getValue()));
 
             String depotId = depotCombo.getValue().split(" - ")[0];
-            pstmt.setInt(5, Integer.parseInt(depotId));
+            HelloApplication.DB.getPstmt().setInt(5, Integer.parseInt(depotId));
 
-            pstmt.executeUpdate();
+            //HelloApplication.DB.getHelloApplication.DB.getPstmt()().executeUpdate();
+            HelloApplication.DB.executePsmt();
             statusLabel.setText("Vehicle added successfully!");
             clearForm();
             loadVehicles();
@@ -147,6 +151,9 @@ public class VehicleManagementController {
         } catch (SQLException e) {
             statusLabel.setText("Error: " + e.getMessage());
             e.printStackTrace();
+        }
+        finally {
+            HelloApplication.DB.closeDataLink();
         }
     }
 
@@ -160,19 +167,20 @@ public class VehicleManagementController {
 
         String query = "UPDATE Vehicle SET registration_number=?, vehicle_type=?, capacity=?, purchase_date=?, depot_id=? WHERE vehicle_id=?";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try {
+            HelloApplication.DB.openConnection();
+            HelloApplication.DB.setPstmt(query);
 
-            pstmt.setString(1, regNumberField.getText());
-            pstmt.setString(2, vehicleTypeCombo.getValue());
-            pstmt.setInt(3, Integer.parseInt(capacityField.getText()));
-            pstmt.setDate(4, Date.valueOf(purchaseDatePicker.getValue()));
+            HelloApplication.DB.getPstmt().setString(1, regNumberField.getText());
+            HelloApplication.DB.getPstmt().setString(2, vehicleTypeCombo.getValue());
+            HelloApplication.DB.getPstmt().setInt(3, Integer.parseInt(capacityField.getText()));
+            HelloApplication.DB.getPstmt().setDate(4, Date.valueOf(purchaseDatePicker.getValue()));
 
             String depotId = depotCombo.getValue().split(" - ")[0];
-            pstmt.setInt(5, Integer.parseInt(depotId));
-            pstmt.setInt(6, selectedVehicle.getVehicleId());
+            HelloApplication.DB.getPstmt().setInt(5, Integer.parseInt(depotId));
+            HelloApplication.DB.getPstmt().setInt(6, selectedVehicle.getVehicleId());
 
-            pstmt.executeUpdate();
+            HelloApplication.DB.executeUpdatePstmt();
             statusLabel.setText("Vehicle updated successfully!");
             clearForm();
             loadVehicles();
@@ -180,6 +188,9 @@ public class VehicleManagementController {
         } catch (SQLException e) {
             statusLabel.setText("Error: " + e.getMessage());
             e.printStackTrace();
+        }
+        finally {
+            HelloApplication.DB.closeDataLink();
         }
     }
 
@@ -196,11 +207,12 @@ public class VehicleManagementController {
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             String query = "DELETE FROM Vehicle WHERE vehicle_id = ?";
-            try (Connection conn = DBConnection.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+            try  {
+                HelloApplication.DB.openConnection();
+                HelloApplication.DB.setPstmt(query);
 
-                pstmt.setInt(1, selectedVehicle.getVehicleId());
-                pstmt.executeUpdate();
+                HelloApplication.DB.getPstmt().setInt(1, selectedVehicle.getVehicleId());
+                HelloApplication.DB.executeUpdatePstmt();
                 statusLabel.setText("Vehicle deleted successfully!");
                 clearForm();
                 loadVehicles();
@@ -208,6 +220,9 @@ public class VehicleManagementController {
             } catch (SQLException e) {
                 statusLabel.setText("Error: " + e.getMessage());
                 e.printStackTrace();
+            }
+            finally {
+                HelloApplication.DB.closeDataLink();
             }
         }
     }

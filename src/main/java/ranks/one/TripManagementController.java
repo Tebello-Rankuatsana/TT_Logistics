@@ -125,7 +125,8 @@ public class TripManagementController {
         // Load vehicles
         String vehicleQuery = "SELECT vehicle_id, registration_number FROM Vehicle";
         try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
+             //Statement stmt = conn.createStatement();
+             HelloApplication.DB.setStmt(query);
              ResultSet rs = stmt.executeQuery(vehicleQuery)) {
             while (rs.next()) {
                 String vehicleItem = rs.getInt("vehicle_id") + " - " + rs.getString("registration_number");
@@ -144,7 +145,8 @@ public class TripManagementController {
                 "SELECT p.person_id, p.full_name FROM Person p " +
                 "JOIN Contract_Driver c ON p.person_id = c.person_id";
         try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
+             //Statement stmt = conn.createStatement();
+             HelloApplication.DB.setStmt(driverQuery);
              ResultSet rs = stmt.executeQuery(driverQuery)) {
             while (rs.next()) {
                 driverCombo.getItems().add(rs.getInt("person_id") + " - " + rs.getString("full_name"));

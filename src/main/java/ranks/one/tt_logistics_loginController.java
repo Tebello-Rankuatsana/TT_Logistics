@@ -60,28 +60,15 @@ public class tt_logistics_loginController {
     }
 
     private boolean authenticateUser(String username, String password) {
-        String query = "SELECT name, privilege_type FROM users WHERE name = ? AND password = ?";
+       //loggin
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        HelloApplication.DB = new DBConnection(username,password);
+        if (HelloApplication.DB.getDatabaseLink() != null)
+            return true;
+        else
+            return  false;
 
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    loggedInUsername = rs.getString("name");
-                    loggedInPrivilege = rs.getString("privilege_type");
-
-                    System.out.println("Login Successful - User: " + loggedInUsername + ", Privilege: " + loggedInPrivilege);
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            feedbackLabel.setText("Database error: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return false;
     }
 
     private void clearFields() {

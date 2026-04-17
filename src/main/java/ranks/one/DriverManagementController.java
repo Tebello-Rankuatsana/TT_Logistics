@@ -96,7 +96,7 @@ public class DriverManagementController {
 
     private void loadPersonComboBoxes() {
         String query = "SELECT person_id, full_name FROM Person";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -123,7 +123,7 @@ public class DriverManagementController {
                 "FROM Person p JOIN Full_Time_Driver f ON p.person_id = f.person_id";
 
         ObservableList<FullTimeDriver> list = FXCollections.observableArrayList();
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -148,7 +148,7 @@ public class DriverManagementController {
                 "FROM Person p JOIN Contract_Driver c ON p.person_id = c.person_id";
 
         ObservableList<ContractDriver> list = FXCollections.observableArrayList();
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -177,7 +177,7 @@ public class DriverManagementController {
 
         String query = "INSERT INTO Person (full_name, address, phone, date_of_birth) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, fullNameField.getText());
@@ -212,7 +212,7 @@ public class DriverManagementController {
         int personId = Integer.parseInt(fullTimePersonCombo.getValue().split(" - ")[0]);
         String query = "INSERT INTO Full_Time_Driver (person_id, employee_number, salary, hire_date) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, personId);
@@ -246,7 +246,7 @@ public class DriverManagementController {
         int personId = Integer.parseInt(contractPersonCombo.getValue().split(" - ")[0]);
         String query = "INSERT INTO Contract_Driver (person_id, contract_number, hourly_rate) VALUES (?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, personId);

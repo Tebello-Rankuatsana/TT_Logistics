@@ -123,10 +123,10 @@ public class TripManagementController {
         } catch (SQLException e) { e.printStackTrace(); }
 
         // Load vehicles
-        String vehicleQuery = "SELECT vehicle_id, registration_number FROM Vehicle";
+        String query = "SELECT vehicle_id, registration_number FROM Vehicle";
         try (Connection conn = HelloApplication.DB.getDatabaseLink();
-             //Statement stmt = conn.createStatement();
-             HelloApplication.DB.setStmt(vehicleQuery);
+             Statement stmt = conn.createStatement();
+             HelloApplication.DB.setStmt(query);
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 String vehicleItem = rs.getInt("vehicle_id") + " - " + rs.getString("registration_number");
@@ -144,8 +144,8 @@ public class TripManagementController {
                 "UNION " +
                 "SELECT p.person_id, p.full_name FROM Person p " +
                 "JOIN Contract_Driver c ON p.person_id = c.person_id";
-        try (Connection conn = DBConnection.getConnection();
-             //Statement stmt = conn.createStatement();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
+             Statement stmt = conn.createStatement();
              HelloApplication.DB.setStmt(driverQuery);
              ResultSet rs = stmt.executeQuery(driverQuery)) {
             while (rs.next()) {
@@ -157,7 +157,7 @@ public class TripManagementController {
     private void loadDeliveryCombo() {
         deliveryCombo.getItems().clear();
         String query = "SELECT delivery_id, origin, destination FROM Delivery WHERE delivery_status != 'Completed'";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -180,7 +180,7 @@ public class TripManagementController {
         }
 
         ObservableList<Delivery> list = FXCollections.observableArrayList();
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -207,7 +207,7 @@ public class TripManagementController {
                 "JOIN Delivery d ON da.delivery_id = d.delivery_id";
 
         ObservableList<DriverAssignment> list = FXCollections.observableArrayList();
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -228,7 +228,7 @@ public class TripManagementController {
                 "JOIN Vehicle v ON vm.vehicle_id = v.vehicle_id ORDER BY vm.maintenance_date DESC";
 
         ObservableList<VehicleMaintenance> list = FXCollections.observableArrayList();
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -259,7 +259,7 @@ public class TripManagementController {
         String query = "INSERT INTO Delivery (delivery_date, origin, destination, delivery_status, client_id, vehicle_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setDate(1, Date.valueOf(deliveryDatePicker.getValue()));
@@ -297,7 +297,7 @@ public class TripManagementController {
         // Call stored procedure for assigning driver
         String call = "{CALL assign_driver_to_delivery(?, ?, ?, ?)}";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              CallableStatement cstmt = conn.prepareCall(call)) {
 
             cstmt.setInt(1, personId);
@@ -337,7 +337,7 @@ public class TripManagementController {
 //        calling procedure to record vehicle maintenace
         String call = "{CALL record_vehicle_maintenance(?, ?, ?, ?)}";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = HelloApplication.DB.getDatabaseLink();
              CallableStatement cstmt = conn.prepareCall(call)) {
 
             cstmt.setInt(1, vehicleId);

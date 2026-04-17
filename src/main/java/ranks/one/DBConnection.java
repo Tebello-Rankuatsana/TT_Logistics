@@ -54,7 +54,7 @@ public class DBConnection {
         return stmt;
     }
 
-    public void setStmt() {
+    public void setStmt(String query) {
         try {
             this.stmt = this.getDatabaseLink().createStatement();
 

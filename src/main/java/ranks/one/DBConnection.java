@@ -56,10 +56,10 @@ public class DBConnection {
 
     public void setStmt(String query) {
         try {
-            this.stmt = this.getDatabaseLink().createStatement();
+            this.stmt = this.getDatabaseLink().createStatement(query);
 
         }catch (SQLException e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

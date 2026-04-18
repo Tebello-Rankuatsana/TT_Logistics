@@ -44,7 +44,7 @@ public class DBConnection {
 
     public void setRs(String query) {
         try{
-            this.rs = this.stmt.executeQuery(query);
+            this.rs = this.getDatabaseLink().createStatement().getResultSet();
         }catch(SQLException e){
             e.printStackTrace();
         }

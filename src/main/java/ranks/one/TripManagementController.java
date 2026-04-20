@@ -146,7 +146,7 @@ public class TripManagementController {
                 "JOIN Contract_Driver c ON p.person_id = c.person_id";
         try (Connection conn = HelloApplication.DB.getDatabaseLink();
              HelloApplication.DB.openConnection();
-             HelloApplication.DB.getStmt(driverQuery);
+             HelloApplication.DB.getStmt();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 driverCombo.getItems().add(rs.getInt("person_id") + " - " + rs.getString("full_name"));
